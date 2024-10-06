@@ -2,47 +2,67 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 400,
   "height": 300,
-  "title": "Number of bachelor holders in Australia by state (2023)",
-  "projection": {"type": "mercator"},
+  "title": "Number of students currently enrolled in study",
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {
+        "input": "range",
+        "min": 2014,
+        "max": 2023,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "projection": {"type": "equirectangular"},
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-A2/refs/heads/main/js/Aussie.topojson",
-        "format": {"type": "topojson", "feature": "AUS_2016_AUST"}
+        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/js/Aussie.topojson",
+        "format": {"type": "topojson", "feature": "STE_2016_AUST"}
       },
       "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-A2/refs/heads/main/js/Aussie.topojson",
-        "format": {"type": "topojson", "feature": "STE_2016_AUST"}
+        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/educationData.csv"
       },
-      "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-A2/refs/heads/main/Data/degreeHolders.csv"
-      },
-      "mark": {"type": "circle", "tooltip": {"content": "data"}},
+      "transform": [
+        {"filter": "datum.Year == Year_selection"}
+      ],
+      "mark": {"type": "circle", "opacity": 0.8},
       "encoding": {
         "longitude": {"field": "Longitude", "type": "quantitative"},
         "latitude": {"field": "Latitude", "type": "quantitative"},
         "size": {
-          "field": "Number",
+          "field": "Persons",
           "type": "quantitative",
-          "title": "Bachelor Holders",
+          "title": "Enrolled Students",
           "scale": {
             "type": "threshold",
-            "domain": [100000, 300000, 600000, 1500000, 2000000],
+            "domain": [100000, 300000, 600000, 1000000, 1500000],
             "range": [50, 100, 300, 600, 1000, 2000]
           },
           "legend": {"format": ".2s"}
-      },
-      "tooltip"  : [ 
-        {  "field"  :   "State"  ,   "type"  :   "nominal"  }, 
-        {  "field"  :   "Number"  ,   "type"  :   "quantitative"  ,   "format"  :   ",", "title": "Number of Bachelor Holders" }
-      ] 
+        },
+        "color": {
+          "field": "Persons",
+          "type": "quantitative",
+          "title": "Enrolled Students",
+          "scale": {
+            "type": "threshold",
+            "domain": [100000, 300000, 600000, 1000000, 1500000],
+            "scheme": "blues"
+          }
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal"},
+          {"field": "Persons", "type": "quantitative", "format": ",", "title": "Number of Enrolled Students"},
+          {"field": "Year", "type": "ordinal"}
+        ]
+      }
     }
-  }
   ]
 }
