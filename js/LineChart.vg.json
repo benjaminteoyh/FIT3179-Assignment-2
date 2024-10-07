@@ -1,0 +1,23 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": 400,
+      "height": 150,
+      "title": "Total Enrolment Over the Years by State",
+      "data": {
+        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/educationData.csv"
+      },
+      "transform": [
+        {"aggregate": [{"op": "sum", "field": "Persons", "as": "Total Enrolled"}], "groupby": ["Year", "State"]}
+      ],
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "Year", "type": "temporal", "title": "Year"},
+        "y": {"field": "Total Enrolled", "type": "quantitative", "title": "Total Enrolled Students"},
+        "color": {"field": "State", "type": "nominal", "title": "State"},
+        "tooltip": [
+          {"field": "Year", "type": "temporal", "title": "Year"},
+          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Total Enrolled Students"}
+        ]
+      }
+}
