@@ -1,0 +1,97 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "config": {"view": {"stroke": ""}},
+    "width": 500,
+    "height": 500,
+    "data": {
+      "values": [
+        {"State": "New South Wales", "Status": "Population", "Proportion": 59},
+        {"State": "Victoria", "Status": "Population", "Proportion": 62},
+        {"State": "Queensland", "Status": "Population", "Proportion": 66},
+        {"State": "South Australia", "Status": "Population", "Proportion": 62},
+        {"State": "Western Australia", "Status": "Population", "Proportion": 68},
+        {"State": "Tasmania", "Status": "Population", "Proportion": 68},
+        {"State": "Northern Territory", "Status": "Population", "Proportion": 63},
+        {"State": "Australian Capital Territory", "Status": "Population", "Proportion": 62},
+        {"State": "New South Wales", "Status": "Domestic", "Proportion": 15},
+        {"State": "Victoria", "Status": "Domestic", "Proportion": 16},
+        {"State": "Queensland", "Status": "Domestic", "Proportion": 14},
+        {"State": "South Australia", "Status": "Domestic", "Proportion": 14},
+        {"State": "Western Australia", "Status": "Domestic", "Proportion": 14},
+        {"State": "Tasmania", "Status": "Domestic", "Proportion": 14},
+        {"State": "Northern Territory", "Status": "Domestic", "Proportion": 18},
+        {"State": "Australian Capital Territory", "Status": "Domestic", "Proportion": 18},
+        {"State": "New South Wales", "Status": "International", "Proportion": 26},
+        {"State": "Victoria", "Status": "International", "Proportion": 22},
+        {"State": "Queensland", "Status": "International", "Proportion": 20},
+        {"State": "South Australia", "Status": "International", "Proportion": 24},
+        {"State": "Western Australia", "Status": "International", "Proportion": 18},
+        {"State": "Tasmania", "Status": "International", "Proportion": 18},
+        {"State": "Northern Territory", "Status": "International", "Proportion": 19},
+        {"State": "Australian Capital Territory", "Status": "International", "Proportion": 20}
+      ]
+    },
+    "params": [
+      {
+        "name": "state_selection",
+        "value": "New South Wales",
+        "bind": {
+          "input": "select",
+          "options": [
+            "New South Wales",
+            "Victoria",
+            "Queensland",
+            "South Australia",
+            "Western Australia",
+            "Tasmania",
+            "Northern Territory",
+            "Australian Capital Territory"
+          ],
+          "name": "Select State: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "datum.State == state_selection"},
+      {"window": [{"op": "sum", "field": "Proportion", "as": "TotalProportion"}]},
+      {"window": [{"op": "row_number", "as": "id"}]},
+      {
+        "calculate": "sequence(0, datum.Proportion)",
+        "as": "positions"
+      },
+      {"flatten": ["positions"]},
+      {"calculate": "ceil((datum.positions + 1) / 10)", "as": "row"},
+      {"calculate": "(datum.positions % 10) + 1", "as": "col"}
+    ],
+    "layer": [
+      {
+        "mark": {"type": "point", "filled": true},
+        "encoding": {
+          "x": {"field": "col", "type": "ordinal", "axis": null},
+          "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending"},
+          "shape": {
+            "value": "M1.7 -1.7h-0.8c0.3 -0.2 0.6 -0.5 0.6 -0.9c0 -0.6 -0.4 -1 -1 -1c-0.6 0 -1 0.4 -1 1c0 0.4 0.2 0.7 0.6 0.9h-0.8c-0.4 0 -0.7 0.3 -0.7 0.6v1.9c0 0.3 0.3 0.6 0.6 0.6h0.2c0 0 0 0.1 0 0.1v1.9c0 0.3 0.2 0.6 0.3 0.6h1.3c0.2 0 0.3 -0.3 0.3 -0.6v-1.8c0 0 0 -0.1 0 -0.1h0.2c0.3 0 0.6 -0.3 0.6 -0.6v-2c0.2 -0.3 -0.1 -0.6 -0.4 -0.6z"
+          },
+          "color": {
+            "field": "Status",
+            "type": "nominal",
+            "scale": {
+              "domain": ["Population", "Domestic", "International"],
+              "range": ["#808080", "#0000FF", "#008000"]
+            },
+            "legend": {"title": "Status"}
+          },
+          "size": {"value": 100}
+        }
+      },
+      {
+        "mark": {"type": "text", "baseline": "middle", "align": "left", "dx": 5},
+        "encoding": {
+          "x": {"value": 0},
+          "y": {"field": "id", "type": "ordinal"},
+          "text": {"field": "Status"},
+          "color": {"value": "black"}
+        }
+      }
+    ]
+  }
