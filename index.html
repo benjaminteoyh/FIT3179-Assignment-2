@@ -31,22 +31,61 @@
     <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>Assignment 2</h1>
-        <p>Education in Australia</p>
+        <h1>Education in Australia</h1>
+        <p>This page shows an overview on how educated Australians are.</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+  <!-- pure grid group -->
+  <div class="pure-g">
+    <div class="pure-u-2-3">
+      <div id="vis2" class="vis-container"></div>
+    </div>
+    <div class="pure-u-1-3">
+      <div class="description description-right">
+        <h2>Education enrollment by state</h2>
+        <p>The map here shows how many people in each state are currently enrolled in studies.
+          Use the filter at the bottom of the map to check how it changes over time.
+          This number includes all student enrollments from Year 10 to Postgraduate diplomas and degrees.
+          To see the breakdown of how many students pursuing each course, check the bar chart at the bottom.
+        </p>
       </div>
     </div>
     <!-- end pure grid group -->
 
     <!-- pure grid group -->
     <div class="pure-g">
-      <div class="pure-u-1-2">
-        <div class="pure-u-1-2">
+      <div class="pure-u-2-3">
           <div id="vis1" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Enrollment changes over time</h2>
+          <p>The line chart on the left allows further visualisation of how student enrollment has changed over time.
+            The isotype below shows the breakdown of the population in each state, with domestic students in blue, international students in green, and all other population in grey.
+          </p>
+        </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Who are these students</h2>
+          <p>The following charts on the right show demographics of the students in Australia.
+            The stacked bar chart shows the breakdown of what educational qualifications people in each state have.
+          </p>
         </div>
       </div>
-      <div class="pure-u-1-2">
-        <div id="vis2" class="vis-container"></div>
+      <div class="pure-u-1-3">
+        <div id="vis4" class="vis-container"></div>
       </div>
+      <div class="pure-u-1-3" style="width: 31.5%;">
+        <div id="vis3" class="vis-container" style="margin-left: 15px;"></div>
+      </div>
+
     </div>
     <!-- end pure grid group -->
 
@@ -55,10 +94,20 @@
   <script type="text/javascript">
     var specVis1 = "js/LineChart.vg.json";
     var specVis2 = "js/proportionalSymbol.vg.json";
+    var specVis3 = "js/isotype.vg.json";
+    var specVis4 = "js/stackedBar.vg.json";
 
     vegaEmbed('#vis1', specVis1, { "actions": false });
 
     vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', specVis4, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 

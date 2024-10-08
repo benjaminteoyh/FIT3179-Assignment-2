@@ -1,0 +1,25 @@
+State,Status,Proportion
+New South Wales,Population,59
+Victoria,Population,62
+Queensland,Population,66
+South Australia,Population,62
+Western Australia,Population,68
+Tasmania,Population,68
+Northern Territory,Population,63
+Australian Capital Territory,Population,62
+New South Wales,Domestic,15
+Victoria,Domestic,16
+Queensland,Domestic,14
+South Australia,Domestic,14
+Western Australia,Domestic,14
+Tasmania,Domestic,14
+Northern Territory,Domestic,18
+Australian Capital Territory,Domestic,18
+New South Wales,International,26
+Victoria,International,22
+Queensland,International,20
+South Australia,International,24
+Western Australia,International,18
+Tasmania,International,18
+Northern Territory,International,19
+Australian Capital Territory,International,20

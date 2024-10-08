@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": 400,
-      "height": 150,
+      "width": 800,
+      "height": 200,
       "title": "Total Enrolment Over the Years by State",
       "data": {
         "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/educationData.csv"
