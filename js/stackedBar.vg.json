@@ -3,7 +3,7 @@
   "width": "container",
   "height": 150,
   "title": "Highest education by State",
-  "data": {"url": "../Data/highestEducation.csv"},
+  "data": {"url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/highestEducation.csv"},
   "params": [
     {
       "name": "State_selection",
