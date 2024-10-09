@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 400,
-  "height": 300,
+  "width": "container",
+  "height": 150,
   "title": "Highest education by State",
   "data": {"url": "../Data/highestEducation.csv"},
   "params": [
@@ -43,7 +43,7 @@
           "field": "Persons",
           "type": "quantitative",
           "stack": "zero",
-          "title": "Population"
+          "title": "Educated Population"
         },
         "color": {
           "field": "State",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
+  "width": 400,
   "height": 400,
   "title": "Number of people currently enrolled in study",
   "params": [
@@ -16,7 +16,11 @@
       }
     }
   ],
-  "projection": {"type": "mercator"},
+  "projection": {     
+    "parallels": [-16, -37], 
+    "rotate": [-134, 0, 0], 
+    "type": "conicEqualArea"   
+},
   "layer": [
     {
       "data": {
@@ -42,20 +46,10 @@
           "title": "Enrolled Students",
           "scale": {
             "type": "threshold",
-            "domain": [100000, 300000, 600000, 1000000, 1500000],
-            "range": [50, 100, 300, 600, 1000, 2000]
+            "domain": [20000, 50000, 100000, 400000, 700000, 1000000],
+            "range": [25, 50, 150, 300, 500, 1000, 1500]
           },
           "legend": {"format": ".2s"}
-        },
-        "color": {
-          "field": "Persons",
-          "type": "quantitative",
-          "title": "Enrolled Students",
-          "scale": {
-            "type": "threshold",
-            "domain": [100000, 300000, 600000, 1000000, 1500000],
-            "scheme": "blues"
-          }
         },
         "tooltip": [
           {"field": "State", "type": "nominal"},

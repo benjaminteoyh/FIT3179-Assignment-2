@@ -3,11 +3,20 @@ body *{
 }
 
 h1 {
-    font-weight: 900;
+    font-family: 'Bebas Neue', sans-serif; /* Change this to your desired font */
+    font-weight: 900; /* Adjust weight if needed */
+    font-size:70px;
+    color: #333; /* Change text color if desired */
+}
+
+h2 {
+    font-family: 'Oswald', sans-serif; /* Change this to your desired font */
+    font-weight: 600; /* Adjust weight if needed */
+    color: #2306a5; /* Change text color if desired */
 }
 
 body {
-    background-color: lightgray;
+    background-color: rgb(252, 243, 226);
 }
 
 .page {
