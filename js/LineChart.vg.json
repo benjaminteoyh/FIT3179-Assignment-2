@@ -1,29 +1,47 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": "container",
-      "height": 300,
-      "title": "Student Enrolment Over Time",
-      "data": {
-        "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/educationData.csv"
-      },
-      "transform": [
-        {"aggregate": [{"op": "sum", "field": "Persons", "as": "Total Enrolled"}], "groupby": ["Year", "State"]}
-      ],
-      "mark": "line",
-      "encoding": {
-        "x": {"field": "Year", "type": "ordinal", "title": "Year","timeUnit":"year"},
-        "y": {"field": "Total Enrolled", "type": "quantitative", "title": "Total Enrolled Students"},
-        "color": {
-          "field": "State",
-          "type": "nominal",
-          "title": "State",
-          "sort": {"field": "Total Enrolled", "op": "sum", "order": "descending"}
-        }
-        ,
-        "tooltip": [
-          {"field": "Year", "type": "temporal", "title": "Year", "timeUnit": "year"},
-          {"field": "State", "type": "nominal", "title": "State"},
-          {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Total Enrolled Students"}
-        ]
+  "width": "container",
+  "height": 300,
+  "title": "Student Enrolment Over Time",
+  "data": {
+    "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/educationData.csv"
+  },
+  "transform": [
+    {
+      "lookup": "State",
+      "from": {
+        "data": {
+          "values": [
+            {"State": "New South Wales", "Abbreviation": "NSW"},
+            {"State": "Victoria", "Abbreviation": "VIC"},
+            {"State": "Queensland", "Abbreviation": "QLD"},
+            {"State": "South Australia", "Abbreviation": "SA"},
+            {"State": "Western Australia", "Abbreviation": "WA"},
+            {"State": "Tasmania", "Abbreviation": "TAS"},
+            {"State": "Northern Territory", "Abbreviation": "NT"},
+            {"State": "Australian Capital Territory", "Abbreviation": "ACT"}
+          ]
+        },
+        "key": "State",
+        "fields": ["Abbreviation"]
       }
+    },
+    {"aggregate": [{"op": "sum", "field": "Persons", "as": "Total Enrolled"}], "groupby": ["Year", "Abbreviation"]}
+  ],
+  "mark": "line",
+  "encoding": {
+    "x": {"field": "Year", "type": "ordinal", "title": "Year", "timeUnit": "year"},
+    "y": {"field": "Total Enrolled", "type": "quantitative", "title": "Total Enrolled Students"},
+    "color": {
+      "field": "Abbreviation",
+      "type": "nominal",
+      "title": "State",
+      "sort": {"field": "Total Enrolled", "op": "sum", "order": "descending"}
+    },
+    "tooltip": [
+      {"field": "Year", "type": "temporal", "title": "Year", "timeUnit": "year"},
+      {"field": "Abbreviation", "type": "nominal", "title": "State"},
+      {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Total Enrolled Students"}
+    ]
+  }
 }

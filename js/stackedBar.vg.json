@@ -68,7 +68,7 @@
             "Year 10",
             "Below Year 10"
           ],
-          "title": "Highest Education Level"
+          "title":null
         },
         "y": {
           "field": "Persons",
