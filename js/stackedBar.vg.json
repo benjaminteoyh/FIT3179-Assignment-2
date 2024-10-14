@@ -1,9 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 150,
+  "height": 300,
   "title": "Highest education by State",
-  "data": {"url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/highestEducation.csv"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/highestEducation.csv"
+  },
   "params": [
     {
       "name": "State_selection",
@@ -11,12 +13,41 @@
         "input": "select",
         "options": [null, "NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"],
         "labels": ["Show All", "NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"],
-        "name": "State Selection: "
+        "name": "Select State: "
+      }
+    },
+    {
+      "name": "Education_selection",
+      "bind": {
+        "input": "select",
+        "options": [null, "Postgraduate Degree", "Graduate Diploma/Graduate Certificate", "Bachelor Degree", "Advanced Diploma/Diploma", "Certificate III/IV", "Year 12 or equivalent", "Year 11", "Year 10", "Below Year 10"],
+        "labels": ["Show All", "Postgraduate Degree", "Graduate Diploma/Graduate Certificate", "Bachelor Degree", "Advanced Diploma/Diploma", "Certificate III/IV", "Year 12 or equivalent", "Year 11", "Year 10", "Below Year 10"],
+        "name": "Select Education Level: "
       }
     }
   ],
   "transform": [
-    {"filter": "State_selection == null || datum.State == State_selection"}
+    {"filter": "State_selection == null || datum.State == State_selection"},
+    {"filter": "Education_selection == null || datum.ed == Education_selection"},
+    {
+      "lookup": "State",
+      "from": {
+        "data": {
+          "values": [
+            {"State": "NSW", "rank": 1},
+            {"State": "VIC", "rank": 2},
+            {"State": "QLD", "rank": 3},
+            {"State": "WA", "rank": 4},
+            {"State": "SA", "rank": 5},
+            {"State": "ACT", "rank": 6},
+            {"State": "TAS", "rank": 7},
+            {"State": "NT", "rank": 8}
+          ]
+        },
+        "key": "State",
+        "fields": ["rank"]
+      }
+    }
   ],
   "layer": [
     {
@@ -42,61 +73,25 @@
         "y": {
           "field": "Persons",
           "type": "quantitative",
-          "stack": "zero",
+          "stack": true,
           "title": "Educated Population"
         },
         "color": {
           "field": "State",
           "type": "nominal",
-          "title": "State"
+          "title": "State",
+          "sort": ["NSW", "VIC", "QLD", "WA", "SA", "ACT", "TAS", "NT"]
+        },
+        "order": {
+          "field": "rank",
+          "type": "quantitative",
+          "sort": "ascending"
         },
         "tooltip": [
           {"field": "ed", "type": "nominal", "title": "Highest Education"},
           {"field": "Persons", "type": "quantitative", "format": ",", "title": "Population"},
           {"field": "State", "type": "nominal"}
         ]
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "dy": -5
-      },
-      "encoding": {
-        "x": {
-          "field": "ed",
-          "type": "nominal",
-          "axis": {"labelAngle": -45},
-          "sort": [
-            "Postgraduate Degree",
-            "Graduate Diploma/Graduate Certificate",
-            "Bachelor Degree",
-            "Advanced Diploma/Diploma",
-            "Certificate III/IV",
-            "Year 12 or equivalent",
-            "Year 11",
-            "Year 10",
-            "Below Year 10"
-          ]
-        },
-        "y": {
-          "field": "Persons",
-          "type": "quantitative",
-          "stack": "zero"
-        },
-        "text": {"field": "Persons", "type": "quantitative", "format": ","},
-        "color": {
-          "value": "black"
-        },
-        "opacity": {
-          "condition": { 
-            "test": "datum['State'] == 'VIC'",
-            "value": 1
-          },
-          "value": 0
-        }
       }
     }
   ]
