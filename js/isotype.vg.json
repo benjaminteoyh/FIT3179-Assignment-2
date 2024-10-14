@@ -74,7 +74,11 @@
     },
     {"flatten": ["positions"]},
     {"calculate": "ceil((datum.positions + 1) / 10)", "as": "row"},
-    {"calculate": "(datum.positions % 10) + 1", "as": "col"}
+    {"calculate": "(datum.positions % 10) + 1", "as": "col"},
+    {
+      "calculate": "datum.Proportion / 100",
+      "as": "ProportionPercentage"
+    }
   ],
   "layer": [
     {
@@ -94,7 +98,12 @@
           },
           "legend": {"title": "Status"}
         },
-        "size": {"value": 60}
+        "size": {"value": 60},
+        "tooltip": [
+          {"field": "State", "title": "State"},
+          {"field": "Status", "title": "Status"},
+          {"field": "ProportionPercentage", "title": "Proportion", "type": "quantitative", "format": ".1%"}
+        ]
       }
     }
   ]

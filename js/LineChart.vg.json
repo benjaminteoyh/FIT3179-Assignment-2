@@ -41,7 +41,7 @@
     "tooltip": [
       {"field": "Year", "type": "temporal", "title": "Year", "timeUnit": "year"},
       {"field": "Abbreviation", "type": "nominal", "title": "State"},
-      {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Total Enrolled Students"}
+      {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Enrolled Students"}
     ]
   }
 }

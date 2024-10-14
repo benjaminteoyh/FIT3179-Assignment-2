@@ -53,7 +53,7 @@
         },
         "tooltip": [
           {"field": "State", "type": "nominal"},
-          {"field": "Persons", "type": "quantitative", "format": ",", "title": "Number of Enrolled Students"},
+          {"field": "Persons", "type": "quantitative", "format": ",", "title": "Number of Students"},
           {"field": "Year", "type": "ordinal"}
         ]
       }
