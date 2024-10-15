@@ -78,6 +78,10 @@
     {
       "calculate": "datum.Proportion / 100",
       "as": "ProportionPercentage"
+    },
+    {
+      "calculate": "'Each icon represents 1% of population in ' + datum.State + '.'",
+      "as": "annotationText"
     }
   ],
   "layer": [
@@ -96,7 +100,12 @@
             "domain": ["Non-Students", "Domestic", "International"],
             "range": ["#808080", "#0000FF", "#008000"]
           },
-          "legend": {"title": "Status"}
+          "legend": {
+            "title": "Status",
+            "symbolSize": 100,
+            "symbolOffset": 10,
+            "titlePadding": 15
+          }
         },
         "size": {"value": 60},
         "tooltip": [
@@ -104,6 +113,23 @@
           {"field": "Status", "title": "Status"},
           {"field": "ProportionPercentage", "title": "Proportion", "type": "quantitative", "format": ".1%"}
         ]
+      }
+    },
+    {
+      "mark": {"type": "text", "dx": -80, "dy": -40, "align": "left", "fontSize": 14, "fontStyle": "italic", "color": "darkblue"},
+      "encoding": {
+        "text": {"field": "annotationText"},
+        "x": {"value": 1},
+        "y": {"value": 8}
+      }
+    },
+    {
+      "mark": {"type": "rule", "strokeDash": [4, 2], "color": "darkblue"},
+      "encoding": {
+        "x": {"value":25},
+        "y": {"value": 15},
+        "x2": {"value": -10},
+        "y2": {"value": -20}
       }
     }
   ]

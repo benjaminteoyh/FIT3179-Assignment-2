@@ -37,12 +37,12 @@
           "type": "temporal",
           "title": "Year",
           "timeUnit": "year",
-          "axis": {"format": "%Y"}
+          "axis": {"format": "%Y","tickCount": 10}
         },
         "y": {
           "field": "Total Enrolled",
           "type": "quantitative",
-          "title": "Total Enrolled Students"
+          "title": "Enrolled Students"
         },
         "color": {
           "field": "Abbreviation",

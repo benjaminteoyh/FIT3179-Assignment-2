@@ -2,7 +2,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "title": "Highest Education by State",
   "data": {
     "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/highestEducation.csv"
   },
@@ -53,7 +52,7 @@
           "field": "Persons",
           "type": "quantitative",
           "stack": true,
-          "title": "Educated Population"
+          "title": "Number Of People With Qualification"
         },
         "color": {
           "field": "State",
