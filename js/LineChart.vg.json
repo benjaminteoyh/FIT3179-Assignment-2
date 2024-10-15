@@ -28,20 +28,47 @@
     },
     {"aggregate": [{"op": "sum", "field": "Persons", "as": "Total Enrolled"}], "groupby": ["Year", "Abbreviation"]}
   ],
-  "mark": "line",
-  "encoding": {
-    "x": {"field": "Year", "type": "ordinal", "title": "Year", "timeUnit": "year"},
-    "y": {"field": "Total Enrolled", "type": "quantitative", "title": "Total Enrolled Students"},
-    "color": {
-      "field": "Abbreviation",
-      "type": "nominal",
-      "title": "State",
-      "sort": {"field": "Total Enrolled", "op": "sum", "order": "descending"}
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "title": "Year",
+          "timeUnit": "year",
+          "axis": {"format": "%Y"}
+        },
+        "y": {
+          "field": "Total Enrolled",
+          "type": "quantitative",
+          "title": "Total Enrolled Students"
+        },
+        "color": {
+          "field": "Abbreviation",
+          "type": "nominal",
+          "title": "State",
+          "sort": {"field": "Total Enrolled", "op": "sum", "order": "descending"}
+        },
+        "tooltip": [
+          {"field": "Year", "type": "temporal", "title": "Year", "timeUnit": "year"},
+          {"field": "Abbreviation", "type": "nominal", "title": "State"},
+          {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Enrolled Students"}
+        ]
+      }
     },
-    "tooltip": [
-      {"field": "Year", "type": "temporal", "title": "Year", "timeUnit": "year"},
-      {"field": "Abbreviation", "type": "nominal", "title": "State"},
-      {"field": "Total Enrolled", "type": "quantitative", "format": ",", "title": "Enrolled Students"}
-    ]
-  }
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "dx": 130,
+        "dy": 125,
+        "color": "darkblue"
+      },
+      "encoding": {
+        "text": {"value": "TAS and ACT have similar student enrollment over the years."}
+      }
+    }
+  ]
 }
