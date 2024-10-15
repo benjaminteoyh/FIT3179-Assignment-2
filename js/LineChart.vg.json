@@ -60,15 +60,47 @@
     {
       "mark": {
         "type": "text",
-        "fontSize": 12,
+        "fontSize": 14,
         "fontStyle": "italic",
-        "dx": 130,
+        "fontWeight":"normal",
+        "dx": 5,
+        "dy": 125,
+        "color": "darkgoldenrod"
+      },
+      "encoding": {
+        "text": {"value": "and ACT"}
+      }
+      
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontStyle": "italic",
+        "fontWeight":"normal",
+        "dx": 182,
         "dy": 125,
         "color": "darkblue"
       },
       "encoding": {
-        "text": {"value": "TAS and ACT have similar student enrollment over the years."}
+        "text": {"value": " have similar student enrollment over the years."}
       }
+      
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontStyle": "italic",
+        "fontWeight":"normal",
+        "dx": -40,
+        "dy": 125,
+        "color": "darkorchid"
+      },
+      "encoding": {
+        "text": {"value": "TAS"}
+      }
+      
     }
   ]
 }

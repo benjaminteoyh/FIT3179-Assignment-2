@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "title": "Highest education by State",
+  "title": "Highest Education by State",
   "data": {
     "url": "https://raw.githubusercontent.com/benjaminteoyh/FIT3179-Assignment-2/refs/heads/main/Data/highestEducation.csv"
   },
@@ -28,7 +28,11 @@
   ],
   "transform": [
     {"filter": "State_selection == null || datum.State == State_selection"},
-    {"filter": "Education_selection == null || datum.ed == Education_selection"}
+    {"filter": "Education_selection == null || datum.ed == Education_selection"},
+    {
+      "calculate": "datum.ed == 'Postgraduate Degree' ? 1 : datum.ed == 'Graduate Diploma/Graduate Certificate' ? 2 : datum.ed == 'Bachelor Degree' ? 3 : datum.ed == 'Advanced Diploma/Diploma' ? 4 : datum.ed == 'Certificate III/IV' ? 5 : datum.ed == 'Year 12 or equivalent' ? 6 : datum.ed == 'Year 11' ? 7 : datum.ed == 'Year 10' ? 8 : 9",
+      "as": "ed_rank"
+    }
   ],
   "layer": [
     {
@@ -38,20 +42,14 @@
           "field": "ed",
           "type": "nominal",
           "axis": {"labelAngle": -45},
-          "sort": [
-            "Below Year 10",
-            "Year 10",
-            "Year 11",
-            "Year 12 or equivalent",
-            "Certificate III/IV",
-            "Advanced Diploma/Diploma",
-            "Bachelor Degree",
-            "Graduate Diploma/Graduate Certificate",
-            "Postgraduate Degree"
-          ],
-          "title": null
+          "title": null,
+          "sort": {
+            "op": "min",
+            "field": "ed_rank"
+          }
         },
         "y": {
+          "aggregate": "sum",
           "field": "Persons",
           "type": "quantitative",
           "stack": true,
@@ -66,8 +64,13 @@
         "tooltip": [
           {"field": "ed", "type": "nominal", "title": "Highest Education"},
           {"field": "Persons", "type": "quantitative", "format": ",", "title": "Population"},
-          {"field": "State", "type": "nominal"}
-        ]
+          {"field": "State", "type": "nominal", "title": "State"}
+        ],
+        "order": {
+          "aggregate": "sum",
+          "field": "Persons",
+          "sort": "descending"
+        }
       }
     },
     {
@@ -78,7 +81,14 @@
         "dy": -5
       },
       "encoding": {
-        "x": {"field": "ed", "type": "nominal"},
+        "x": {
+          "field": "ed",
+          "type": "nominal",
+          "sort": {
+            "op": "min",
+            "field": "ed_rank"
+          }
+        },
         "y": {
           "aggregate": "sum",
           "field": "Persons",
@@ -88,7 +98,7 @@
           "aggregate": "sum",
           "field": "Persons",
           "type": "quantitative",
-          "format": ".3s"
+          "format": ","
         }
       }
     }
