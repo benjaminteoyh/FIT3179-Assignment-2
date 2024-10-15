@@ -28,26 +28,7 @@
   ],
   "transform": [
     {"filter": "State_selection == null || datum.State == State_selection"},
-    {"filter": "Education_selection == null || datum.ed == Education_selection"},
-    {
-      "lookup": "State",
-      "from": {
-        "data": {
-          "values": [
-            {"State": "NSW", "rank": 1},
-            {"State": "VIC", "rank": 2},
-            {"State": "QLD", "rank": 3},
-            {"State": "WA", "rank": 4},
-            {"State": "SA", "rank": 5},
-            {"State": "ACT", "rank": 6},
-            {"State": "TAS", "rank": 7},
-            {"State": "NT", "rank": 8}
-          ]
-        },
-        "key": "State",
-        "fields": ["rank"]
-      }
-    }
+    {"filter": "Education_selection == null || datum.ed == Education_selection"}
   ],
   "layer": [
     {
@@ -58,17 +39,17 @@
           "type": "nominal",
           "axis": {"labelAngle": -45},
           "sort": [
-            "Postgraduate Degree",
-            "Graduate Diploma/Graduate Certificate",
-            "Bachelor Degree",
-            "Advanced Diploma/Diploma",
-            "Certificate III/IV",
-            "Year 12 or equivalent",
-            "Year 11",
+            "Below Year 10",
             "Year 10",
-            "Below Year 10"
+            "Year 11",
+            "Year 12 or equivalent",
+            "Certificate III/IV",
+            "Advanced Diploma/Diploma",
+            "Bachelor Degree",
+            "Graduate Diploma/Graduate Certificate",
+            "Postgraduate Degree"
           ],
-          "title":null
+          "title": null
         },
         "y": {
           "field": "Persons",
@@ -82,16 +63,33 @@
           "title": "State",
           "sort": ["NSW", "VIC", "QLD", "WA", "SA", "ACT", "TAS", "NT"]
         },
-        "order": {
-          "field": "rank",
-          "type": "quantitative",
-          "sort": "ascending"
-        },
         "tooltip": [
           {"field": "ed", "type": "nominal", "title": "Highest Education"},
           {"field": "Persons", "type": "quantitative", "format": ",", "title": "Population"},
           {"field": "State", "type": "nominal"}
         ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -5
+      },
+      "encoding": {
+        "x": {"field": "ed", "type": "nominal"},
+        "y": {
+          "aggregate": "sum",
+          "field": "Persons",
+          "type": "quantitative"
+        },
+        "text": {
+          "aggregate": "sum",
+          "field": "Persons",
+          "type": "quantitative",
+          "format": ".3s"
+        }
       }
     }
   ]
