@@ -68,3 +68,9 @@ h1 {
 .stats {
     font-size: 25px;
 }
+
+img {
+    width: 300px;
+    height: auto;
+    vertical-align: right;
+}
